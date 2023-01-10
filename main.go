@@ -9,15 +9,13 @@ import (
 
 func main() {
 
-	var conf = ReadConfig()
-	if conf.Email != "" {
-		fmt.Println("Email from config file: ", conf.Email)
-	} else {
-		fmt.Println("No email in config file")
+	var email = flag.String("email", "your@email.com", "the email to scan for")
+	myFlagParse()
+	if *email == "your@email.com" {
+		var conf = ReadConfig()
+		email = &conf.Email
 	}
 
-	var email = flag.String("email", "your@email.com", "the email to scan for")
-	flag.Parse()
 	mydir, err := os.Getwd()
 	if err != nil {
 		fmt.Println(err)
@@ -28,11 +26,7 @@ func main() {
 		} else {
 			mydir = flag.Arg(0)
 		}
-
 	}
-	fmt.Println(flag.NArg())
-	fmt.Println(mydir)
-	fmt.Println(*email)
 	directory, err := scan(mydir)
 	if err != nil {
 		log.Fatalf(

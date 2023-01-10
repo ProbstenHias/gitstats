@@ -23,6 +23,16 @@ func getDotFilePath() string {
 
 	dotFile := usr.HomeDir + "/.gitstats"
 
+	_, err = os.Stat(dotFile)
+	if err == nil {
+		return dotFile
+	}
+	f, err := os.Create(dotFile)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer f.Close()
+
 	return dotFile
 }
 
@@ -38,6 +48,5 @@ func ReadConfig() Config {
 	if _, err := toml.DecodeFile(configfile, &config); err != nil {
 		log.Fatal(err)
 	}
-	//log.Print(config.Index)
 	return config
 }
