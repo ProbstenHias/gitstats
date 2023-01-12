@@ -16,7 +16,7 @@ The tool shows the number of commits to your local git repository similar to how
 ## Usage
 
 ```bash
-    gitstats path/to/repo -email=your@email.com
+    gitstats path/to/repo --email=your@email.com
 ```
 
 - the path to the repo is not required, it defaults to the current path

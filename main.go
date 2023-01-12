@@ -1,16 +1,17 @@
 package main
 
 import (
-	"flag"
 	"fmt"
 	"log"
 	"os"
+
+	"github.com/juju/gnuflag"
 )
 
 func main() {
 
-	var email = flag.String("email", "your@email.com", "the email to scan for")
-	myFlagParse()
+	var email = gnuflag.String("email", "your@email.com", "the email to scan for")
+	gnuflag.Parse(true)
 	if *email == "your@email.com" {
 		var conf = ReadConfig()
 		email = &conf.Email
@@ -20,11 +21,11 @@ func main() {
 	if err != nil {
 		fmt.Println(err)
 	}
-	if flag.NArg() > 0 {
-		if flag.Arg(0)[0] != '/' && flag.Arg(0)[0] != '~' {
-			mydir = mydir + "/" + flag.Arg(0)
+	if gnuflag.NArg() > 0 {
+		if gnuflag.Arg(0)[0] != '/' && gnuflag.Arg(0)[0] != '~' {
+			mydir = mydir + "/" + gnuflag.Arg(0)
 		} else {
-			mydir = flag.Arg(0)
+			mydir = gnuflag.Arg(0)
 		}
 	}
 	directory, err := scan(mydir)

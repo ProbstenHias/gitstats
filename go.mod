@@ -5,6 +5,7 @@ go 1.19
 require (
 	github.com/BurntSushi/toml v1.2.1
 	github.com/go-git/go-git/v5 v5.5.2
+	github.com/juju/gnuflag v1.0.0
 )
 
 require (
